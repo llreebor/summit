@@ -2,4 +2,3 @@
 - mobile menu
 - CTA section
 - section paddings
-- make utility class for repeated blocks

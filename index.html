@@ -4,12 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+
+    <!-- Styles -->
     <link rel="stylesheet" href="./assets/css/main.css" />
   </head>
   <body>
     <div class="wrapper">
       <!-- Header & Hero -->
-      <div class="hero__wrapper">
+      <div class="hero__wrapper hidden">
         <!-- Header -->
         <header class="header">
           <div class="container">
@@ -52,8 +54,10 @@
         <!-- TODO: The Opportunity -->
         <section class="section__opportunity">
           <div class="container">
-            <div class="opportunity">
-              <div class="opportunity__item opportunity__item-left">
+            <div class="section__grid opportunity">
+              <div
+                class="section__grid-item section__grid-item--left opportunity__item opportunity__item-left"
+              >
                 <h2 class="section__title">The Opportunity</h2>
                 <h3 class="section__subtitle">
                   You've built a business that works. <br />
@@ -68,7 +72,9 @@
                   more doors.
                 </p>
               </div>
-              <div class="opportunity__item opportunity__item-right">
+              <div
+                class="section__grid-item section__grid-item--right opportunity__item opportunity__item-right"
+              >
                 <h3 class="section__subtitle">
                   We Seek Founders Ready to Grow
                 </h3>
@@ -154,19 +160,24 @@
           </div>
         </section>
 
-        <!-- TODO: Different -->
+        <!-- TODO: Different & Hosts -->
         <section class="section__different">
           <div class="container">
-            <div class="different">
-              <div class="different__item different__item-left">
+            <div class="section__grid different">
+              <div
+                class="section__grid-item section__grid-item--left different__item"
+              >
                 <div class="different__item-inner">
                   <h2 class="section__title">
                     What Makes This Summit Different
                   </h2>
-                  <h3 class="section__subtitle">
-                    This is not <strong>a conference.</strong> <br />
-                    It’s not<strong> a pitch event.</strong> <br />
-                    It’s not <strong> a tactics workshop.</strong>
+                  <h3 class="section__subtitle different__subtitle">
+                    This is not <span class="font-heavy">a conference.</span>
+                    <br />
+                    It’s not<span class="font-heavy"> a pitch event.</span>
+                    <br />
+                    It’s not
+                    <span class="font-heavy"> a tactics workshop.</span>
                   </h3>
                   <p class="section__text">
                     It’s an expertly designed immersive experience: a small
@@ -175,7 +186,26 @@
                     learning with peers who understand the stakes.
                   </p>
                 </div>
-
+              </div>
+              <div
+                class="section__grid-item section__grid-item--right different__item"
+              >
+                <div class="dirrefent__top">
+                  <img
+                    class="different__top-logo"
+                    src="./assets/images/logo.png"
+                    alt="logo"
+                  />
+                  <h4 class="dirrefent__top-title">
+                    ARMENIAN ENTREPRENEURIAL LEADERSHIP SUMMIT
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="section__grid different">
+              <div
+                class="section__grid-item section__grid-item--left different__item"
+              >
                 <img
                   class="different__item-img"
                   src="./assets/images/different-img.png"
@@ -198,14 +228,254 @@
                   </p>
                 </div>
               </div>
-              <div class="different__item different__item-right">
-                <div class="different__item-top"></div>
+              <div
+                class="section__grid-item section__grid-item--right different__item"
+              >
+                <div class="details">
+                  <h2 class="section__title details__title">Summit Details</h2>
+                  <div class="details__inner">
+                    <h3 class="details__subtitle section__subtitle">
+                      <span class="font-heavy">LOCATION</span>
+                    </h3>
+                    <p class="section__text">Debet, Lori Province</p>
+                    <p class="section__text">Concept Hotel by COAF</p>
+                  </div>
+
+                  <div class="details__inner">
+                    <h3 class="details__subtitle section__subtitle">
+                      <span class="font-heavy">SCHEDULE</span>
+                    </h3>
+                    <div class="mb-4">
+                      <p class="section__text uppercase">Program Launch</p>
+                      <p class="section__text">Thursday 22 October - 17:00</p>
+                    </div>
+                    <div class="mb-4">
+                      <p class="section__text uppercase">Program Close</p>
+                      <p class="section__text">Saturday 24 October - 17:00</p>
+                    </div>
+                    <div>
+                      <p class="section__text uppercase">Group Dinners</p>
+                      <p class="section__text">Thursday and Friday Evening</p>
+                    </div>
+                  </div>
+
+                  <div class="details__inner">
+                    <h3 class="details__subtitle section__subtitle">
+                      <span class="font-heavy">COSTS</span>
+                    </h3>
+                    <ul class="details__list">
+                      <li class="details__list-item">
+                        <p class="section__text">
+                          Conference fees and meals are covered by the J. Barkev
+                          M. Kassarjian Charitable Trust.
+                        </p>
+                      </li>
+                      <li class="details__list-item">
+                        <p class="section__text">
+                          Participants are responsible for travel and lodging.
+                          Optional round-trip group transportation between
+                          Yerevan and the hotel will be provided.
+                        </p>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="hosts__wrapper">
+              <h2 class="section__title uppercase font-heavy">Hosts</h2>
+              <div class="section__grid hosts">
+                <div
+                  class="section__grid-item section__grid-item--left hosts__item hosts__item-left"
+                >
+                  <h3 class="hosts__title text-white">
+                    The J. Barkev M. Kassarjian Charitable Trust
+                  </h3>
+
+                  <p class="section__text hosts__text">
+                    Our mission is to strengthen the Armenian entrepreneurial
+                    ecosystem by investing in founders and educators who shape
+                    enduring economic and human impact.
+                  </p>
+
+                  <h3 class="hosts__subtitle text-white">What We Believe</h3>
+
+                  <p class="section__text hosts__text">
+                    Armenia's greatest entrepreneurial advantage isn't found in
+                    solo genius— it's cultivated through ensemble leadership. By
+                    supporting case method teaching (based on Armenian
+                    entrepreneurs and companies), human-centered leadership
+                    development, and holistic learning experiences in Armenia's
+                    academic and entrepreneurial communities, we're building a
+                    generation of founders who lead as voracious learners,
+                    develop high-performing teams, and create companies with
+                    lasting impact.
+                  </p>
+
+                  <p class="section__text hosts__text">
+                    Established in honor of J. Barkev M. Kassarjian - educator,
+                    business advisor, and champion of original thinking.
+                  </p>
+                </div>
+                <div
+                  class="section__grid-item section__grid-item--right hosts__item hosts__item-right"
+                >
+                  <h3 class="text-white">
+                    “BUILD SOMETHING THAT WOULD NOT EXIST IF YOU DIDNT BUILD
+                    IT."
+                  </h3>
+                  <p class="section__text hosts__text mt-10">
+                    - J.B. Kassarjian
+                  </p>
+                  <p class="section__text hosts__text mt-12">
+                    In life, JB Kassarjian developed entrepreneurs and business
+                    leaders from Boston to Shanghai. He saw the role of the
+                    entrepreneur as the leader of an ensemble, all improvising
+                    together to create something beautiful.
+                  </p>
+                </div>
+              </div>
+
+              <div class="section__grid hosts">
+                <div
+                  class="section__grid-item section__grid-item--left hosts__item hosts__item-left"
+                >
+                  <h3 class="hosts__title text-white">
+                    Performance of a Lifetime
+                  </h3>
+
+                  <p class="section__text hosts__text">
+                    We bring to the Armenian entrepreneurial ecosystem a 25-year
+                    track record of growing leaders inside Google, Pfizer,
+                    Infosys, American Express, and hundreds of other demanding
+                    organizations.
+                  </p>
+
+                  <p class="section__text hosts__text">
+                    We don't lecture. We don't do theory. We engage accomplished
+                    entrepreneurs in working through their real challenges —
+                    together — and building the leadership needed to drive
+                    what’s next.
+                  </p>
+
+                  <p class="section__text hosts__text">
+                    The capabilities at the heart of this Summit emerged
+                    directly from conversations with Armenian VCs and founders
+                    who told us what separates the entrepreneurs who break
+                    through from those who plateau. We listened. This Summit is
+                    our response.
+                  </p>
+
+                  <h3 class="hosts__title text-white mt-12">
+                    A letter from the CEO
+                  </h3>
+
+                  <p class="section__text hosts__text">
+                    I've spent the better part of this past year sitting across
+                    from founders from Yerevan to Silicon Valley. Listening to
+                    what it actually takes to build something from nothing — and
+                    what gets in the way of sustainable growth.
+                  </p>
+
+                  <p class="section__text hosts__text">
+                    Armenian entrepreneurs have something more than most.
+                    <a href="#" class="section__text-link">Read On</a>
+                  </p>
+                </div>
+                <div
+                  class="section__grid-item section__grid-item--right hosts__item hosts__item-right"
+                >
+                  <h3 class="text-white">
+                    Armenian Entrepreneurial Leadership Summit
+                  </h3>
+
+                  <ul class="address__list">
+                    <li class="address__list-item">
+                      <img
+                        src="./assets/images/location.png"
+                        alt="location icon"
+                      />
+                      <a href="#">
+                        <p class="section__text">
+                          Concept Hotel by COAF, Debet
+                        </p>
+                      </a>
+                    </li>
+                    <li class="address__list-item">
+                      <img
+                        src="./assets/images/calendar.png"
+                        alt="location icon"
+                      />
+                      <p class="section__text">October 22 - 24, 2026</p>
+                    </li>
+                  </ul>
+
+                  <a href="#" class="btn btn-primary address__btn">
+                    <p>
+                      Questions? <br />
+                      Contact us
+                    </p>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      xmlns:xlink="http://www.w3.org/1999/xlink"
+                      width="67px"
+                      height="57px"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        fill="rgb(42, 3, 109)"
+                        d="M61.881,29.086 C60.091,27.297 57.899,25.955 55.486,25.171 L55.486,4.858 C55.486,2.193 53.313,0.032 50.633,0.032 L5.223,0.032 C2.543,0.032 0.370,2.193 0.370,4.858 L0.370,40.502 C0.376,41.779 0.889,43.001 1.799,43.902 L1.950,44.042 C2.842,44.861 4.010,45.318 5.223,45.323 L11.155,45.323 L11.155,54.927 C11.155,56.024 12.047,56.913 13.150,56.917 C13.723,56.913 14.267,56.670 14.649,56.246 L26.081,45.323 L34.941,45.323 C35.733,47.798 37.106,50.050 38.947,51.892 C45.280,58.190 55.548,58.190 61.881,51.892 C68.214,45.594 68.214,35.383 61.881,29.086 ZM51.490,24.393 C42.551,23.812 34.830,30.547 34.246,39.436 C34.204,40.075 34.200,40.716 34.235,41.355 L25.289,41.355 C24.776,41.349 24.281,41.542 23.908,41.891 L15.129,50.278 L15.129,43.307 C15.126,42.210 14.231,41.322 13.129,41.322 L5.223,41.322 C5.027,41.320 4.837,41.252 4.684,41.129 L4.630,41.076 C4.470,40.919 4.379,40.705 4.377,40.481 L4.377,4.858 C4.391,4.397 4.760,4.025 5.223,4.005 L50.644,4.005 C50.869,4.010 51.084,4.102 51.242,4.263 C51.401,4.420 51.491,4.635 51.490,4.858 L51.490,24.393 ZM14.083,29.654 C12.980,29.711 12.039,28.868 11.981,27.770 C11.924,26.673 12.772,25.737 13.875,25.680 C13.945,25.677 14.014,25.677 14.083,25.680 L32.628,25.680 C33.731,25.737 34.579,26.673 34.522,27.770 C34.468,28.788 33.651,29.601 32.628,29.654 L14.083,29.654 ZM14.083,17.894 C12.980,17.951 12.039,17.108 11.981,16.011 C11.924,14.913 12.772,13.978 13.875,13.921 C13.945,13.917 14.014,13.917 14.083,13.921 L41.778,13.921 C42.882,13.864 43.823,14.707 43.880,15.804 C43.937,16.902 43.090,17.837 41.986,17.894 C41.917,17.898 41.848,17.898 41.778,17.894 L14.083,17.894 ZM52.288,44.492 L47.823,44.492 C47.823,43.730 47.823,42.068 48.077,41.344 C48.251,40.871 48.513,40.435 48.848,40.057 C49.563,39.321 50.329,38.634 51.140,38.003 C51.776,37.467 52.089,37.016 52.089,36.593 C52.110,36.220 51.971,35.856 51.706,35.590 C51.379,35.334 50.967,35.210 50.552,35.242 C50.038,35.223 49.540,35.417 49.177,35.778 C48.739,36.320 48.493,36.991 48.476,37.687 L43.930,37.151 C44.016,35.635 44.664,34.204 45.747,33.134 C46.826,32.119 48.443,31.613 50.600,31.616 C52.052,31.555 53.490,31.929 54.726,32.689 C56.075,33.496 56.896,34.952 56.882,36.518 C56.882,37.193 56.695,37.855 56.343,38.432 C55.728,39.303 54.967,40.063 54.095,40.679 C53.510,41.089 53.003,41.597 52.596,42.181 C52.371,42.941 52.267,43.732 52.288,44.524 L52.288,44.492 ZM52.450,46.101 L52.450,49.366 L47.678,49.366 L47.678,46.095 L52.450,46.101 Z"
+                      />
+                    </svg>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
         </section>
       </main>
+
+      <!-- Footer -->
+      <footer>
+        <div class="container">
+          <div class="footer">
+            <div class="footer__item">
+              <a href="#">
+                <img
+                  class="footer__logo"
+                  src="./assets/images/logo.png"
+                  alt="logo"
+                />
+              </a>
+            </div>
+            <div class="footer__item footer__item-right">
+              <p class="footer__text">
+                Elevate <br />
+                Impact & Growth
+              </p>
+              <a href="#" class="footer__btn btn btn-primary">
+                Apply to Participate by June 1
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.99941 2.9996L4.99941 20.9996C4.99998 21.1818 5.05024 21.3605 5.14479 21.5163C5.23933 21.6721 5.37457 21.7991 5.53596 21.8838C5.69735 21.9684 5.87877 22.0075 6.06069 21.9967C6.24261 21.9859 6.41815 21.9257 6.56841 21.8226L19.5684 12.8226C20.1074 12.4496 20.1074 11.5516 19.5684 11.1776L6.56841 2.1776C6.41846 2.07342 6.24284 2.01233 6.06061 2.00096C5.87839 1.98959 5.69653 2.02838 5.5348 2.11311C5.37307 2.19784 5.23765 2.32527 5.14326 2.48156C5.04887 2.63785 4.99912 2.81702 4.99941 2.9996Z"
+                    fill="#25034d"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   </body>
+
+  <!-- Scripts -->
   <script src="./assets/js/main.js"></script>
 </html>

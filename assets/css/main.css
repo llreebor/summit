@@ -191,6 +191,7 @@ strong {
   line-height: 29px;
   text-transform: uppercase;
   font-weight: 950;
+  color: var(--colorPurple);
   &:hover {
     background: var(--colorOrangeHovered);
   }

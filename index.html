@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Summit</title>
 
     <!-- Styles -->
     <link rel="stylesheet" href="./assets/css/main.css" />
@@ -11,10 +11,11 @@
   <body>
     <div class="wrapper">
       <!-- Header & Hero -->
-      <div class="hero__wrapper hidden">
+      <div class="hero__wrapper">
         <!-- Header -->
         <header class="header">
           <div class="container">
+            <!-- Desctop Menu -->
             <nav class="menu">
               <ul class="menu__list">
                 <li class="menu__list-item">
@@ -28,6 +29,28 @@
                 </li>
               </ul>
             </nav>
+
+            <!-- Mobile Menu -->
+            <div class="mobile__menu">
+              <ul class="mobile__menu-list">
+                <li><a href="#" class="mobile__menu-link">Home</a></li>
+                <li><a href="#" class="mobile__menu-link">Apply</a></li>
+                <li><a href="#" class="mobile__menu-link">Contact</a></li>
+              </ul>
+            </div>
+
+            <!-- Burger Button -->
+            <button
+              id="burger"
+              class="group burger-button"
+              aria-label="Toggle mobile menu"
+              aria-expanded="false"
+              aria-controls="mobile-menu"
+            >
+              <span class="burger-button-top-line"></span>
+              <span class="burger-button-center-line"></span>
+              <span class="burger-button-bottom-line"></span>
+            </button>
           </div>
         </header>
 
@@ -49,11 +72,46 @@
       </div>
 
       <main>
-        <!-- TODO:CTA -->
-
-        <!-- TODO: The Opportunity -->
+        <!-- he Opportunity -->
         <section class="section__opportunity">
           <div class="container">
+            <div class="cta cta__opportunity">
+              <h3 class="cta__title cta__title-opportunity">
+                <span class="font-black">Hosted by</span> the J. Barkev M.
+                Kassarjian Charitable Trust,
+                <span class="font-black"> in partnership with</span> Performance
+                of a Lifetime.
+              </h3>
+              <ul class="address__list">
+                <li class="address__list-item">
+                  <img src="./assets/images/location.png" alt="location icon" />
+                  <a href="#">
+                    <p class="section__text text-purple">
+                      Concept Hotel by COAF, Debet
+                    </p>
+                  </a>
+                </li>
+                <li class="address__list-item">
+                  <img src="./assets/images/calendar.png" alt="location icon" />
+                  <p class="section__text text-purple">October 22 - 24, 2026</p>
+                </li>
+              </ul>
+              <a href="#" class="btn btn-primary btn-sm cta__btn">
+                Apply to Participate by June 1
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.99941 2.9996L4.99941 20.9996C4.99998 21.1818 5.05024 21.3605 5.14479 21.5163C5.23933 21.6721 5.37457 21.7991 5.53596 21.8838C5.69735 21.9684 5.87877 22.0075 6.06069 21.9967C6.24261 21.9859 6.41815 21.9257 6.56841 21.8226L19.5684 12.8226C20.1074 12.4496 20.1074 11.5516 19.5684 11.1776L6.56841 2.1776C6.41846 2.07342 6.24284 2.01233 6.06061 2.00096C5.87839 1.98959 5.69653 2.02838 5.5348 2.11311C5.37307 2.19784 5.23765 2.32527 5.14326 2.48156C5.04887 2.63785 4.99912 2.81702 4.99941 2.9996Z"
+                    fill="#25034d"
+                  />
+                </svg>
+              </a>
+            </div>
             <div class="section__grid opportunity">
               <div
                 class="section__grid-item section__grid-item--left opportunity__item opportunity__item-left"
@@ -92,7 +150,7 @@
           </div>
         </section>
 
-        <!-- TODO: Ready -->
+        <!-- Ready -->
         <section class="section__ready">
           <div class="container">
             <div class="ready">
@@ -160,9 +218,27 @@
           </div>
         </section>
 
-        <!-- TODO: Different & Hosts -->
+        <!-- Different & Hosts -->
         <section class="section__different">
           <div class="container">
+            <div class="cta cta__different">
+              <h3 class="cta__title">Elevate Impact & Growth</h3>
+              <a href="#" class="btn btn-primary btn-sm cta__btn">
+                Apply to Participate by June 1
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M4.99941 2.9996L4.99941 20.9996C4.99998 21.1818 5.05024 21.3605 5.14479 21.5163C5.23933 21.6721 5.37457 21.7991 5.53596 21.8838C5.69735 21.9684 5.87877 22.0075 6.06069 21.9967C6.24261 21.9859 6.41815 21.9257 6.56841 21.8226L19.5684 12.8226C20.1074 12.4496 20.1074 11.5516 19.5684 11.1776L6.56841 2.1776C6.41846 2.07342 6.24284 2.01233 6.06061 2.00096C5.87839 1.98959 5.69653 2.02838 5.5348 2.11311C5.37307 2.19784 5.23765 2.32527 5.14326 2.48156C5.04887 2.63785 4.99912 2.81702 4.99941 2.9996Z"
+                    fill="#25034d"
+                  />
+                </svg>
+              </a>
+            </div>
             <div class="section__grid different">
               <div
                 class="section__grid-item section__grid-item--left different__item"
@@ -282,7 +358,6 @@
                 </div>
               </div>
             </div>
-
             <div class="hosts__wrapper">
               <h2 class="section__title uppercase font-heavy">Hosts</h2>
               <div class="section__grid hosts">
@@ -454,7 +529,7 @@
                 Elevate <br />
                 Impact & Growth
               </p>
-              <a href="#" class="footer__btn btn btn-primary">
+              <a href="#" class="footer__btn btn btn-primary btn-sm">
                 Apply to Participate by June 1
                 <svg
                   width="24"

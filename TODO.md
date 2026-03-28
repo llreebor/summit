@@ -1,4 +1,0 @@
-- responsiveness
-- mobile menu
-- CTA section
-- section paddings

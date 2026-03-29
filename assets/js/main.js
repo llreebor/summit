@@ -4,11 +4,15 @@ function initMobileMenu() {
 
   Object.assign(mobileMenu.style, {
     transform: "translateY(-100%)",
-    transition: "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
     visibility: "hidden",
   });
 
+  const enableTransition = () => {
+    mobileMenu.style.transition = "transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)";
+  };
+
   const openMenu = () => {
+    enableTransition();
     mobileMenu.style.visibility = "visible";
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
@@ -21,6 +25,7 @@ function initMobileMenu() {
   };
 
   const closeMenu = () => {
+    enableTransition();
     mobileMenu.style.transform = "translateY(-100%)";
     burger.classList.remove("active");
     burger.setAttribute("aria-expanded", "false");

@@ -211,7 +211,9 @@ strong {
   justify-content: center;
   gap: 24px;
 }
-
+.read__on-btn {
+  margin-left: auto;
+}
 /* Utils */
 .hidden {
   display: none !important;
@@ -698,6 +700,15 @@ strong {
 }
 .address__btn {
   margin-top: auto;
+}
+
+.read__on-hidden {
+  gap: 48px;
+  display: none;
+
+  @media screen and (width <= 992px) {
+    gap: 32px;
+  }
 }
 
 /* Footer ================================================ */

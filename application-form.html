@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elevate Growth & Impact — Armenian Entrepreneurial Leadership Summit</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#fafbfc;color:#1f2937;-webkit-font-smoothing:antialiased}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useRef} = React;
+
+const SECTIONS = ["Who You Are", "Where You're Stuck", "Your Growth", "Commitment"];
+const DEEP = "#2e1065";
+const MID = "#3b1f8e";
+const ACCENT = "#4c1d95";
+
+const PeaksMark = ({size=120,className=""}) => {
+  const bars=21,cx=size/2,base=size*0.85,peak=size*0.15,spread=size*0.38;
+  return React.createElement("svg",{width:size,height:size,viewBox:`0 0 ${size} ${size}`,className},
+    React.createElement("defs",null,
+      React.createElement("linearGradient",{id:"pG",x1:"0",y1:"1",x2:"0",y2:"0"},
+        React.createElement("stop",{offset:"0%",stopColor:"#f59e0b"}),
+        React.createElement("stop",{offset:"35%",stopColor:ACCENT}),
+        React.createElement("stop",{offset:"100%",stopColor:DEEP})
+      )
+    ),
+    Array.from({length:bars}).map((_,i)=>{
+      const t=i/(bars-1),x=cx-spread+t*spread*2,h=Math.sin(t*Math.PI),top=base-h*(base-peak);
+      return React.createElement("line",{key:i,x1:x,y1:base,x2:x,y2:top,stroke:"url(#pG)",strokeWidth:size/55,strokeLinecap:"round",opacity:0.6+h*0.4});
+    })
+  );
+};
+
+const inputBase = {background:"#f9fafb",border:"1.5px solid #e5e7eb",color:"#1f2937",width:"100%",borderRadius:12,padding:"12px 16px",fontSize:14,transition:"border-color 0.2s, box-shadow 0.2s",outline:"none",fontFamily:"inherit"};
+const focusIn = e=>{e.target.style.borderColor=MID;e.target.style.boxShadow=`0 0 0 3px rgba(59,31,142,0.1)`;};
+const focusOut = e=>{e.target.style.borderColor="#e5e7eb";e.target.style.boxShadow="none";};
+
+const CheckboxGroup = ({options,max,value=[],onChange}) => (
+  <div style={{display:"flex",flexDirection:"column",gap:10}}>
+    {options.map(opt=>(
+      <label key={opt} style={{display:"flex",alignItems:"flex-start",gap:12,cursor:"pointer"}}>
+        <input type="checkbox" checked={value.includes(opt)} onChange={()=>{
+          if(value.includes(opt)) onChange(value.filter(v=>v!==opt));
+          else if(value.length<max) onChange([...value,opt]);
+        }} style={{marginTop:3,width:16,height:16,accentColor:MID,flexShrink:0}} />
+        <span style={{fontSize:14,color:"#374151"}}>{opt}</span>
+      </label>
+    ))}
+    <p style={{fontSize:12,color:"#9ca3af",marginTop:2}}>Select up to {max}</p>
+  </div>
+);
+
+const RadioGroup = ({options,value,onChange}) => (
+  <div style={{display:"flex",flexDirection:"column",gap:10}}>
+    {options.map(opt=>(
+      <label key={opt} style={{display:"flex",alignItems:"flex-start",gap:12,cursor:"pointer"}}>
+        <input type="radio" checked={value===opt} onChange={()=>onChange(opt)} style={{marginTop:3,width:16,height:16,accentColor:MID,flexShrink:0}} />
+        <span style={{fontSize:14,color:"#374151"}}>{opt}</span>
+      </label>
+    ))}
+  </div>
+);
+
+const Textarea = ({value,onChange,placeholder,maxWords=250}) => {
+  const wc = value.trim()?value.trim().split(/\s+/).length:0;
+  return (
+    <div>
+      <textarea value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder} rows={7}
+        style={{...inputBase,resize:"vertical",fontFamily:"inherit"}} onFocus={focusIn} onBlur={focusOut} />
+      <p style={{fontSize:12,marginTop:4,textAlign:"right",color:wc>maxWords?"#ef4444":"#9ca3af"}}>{wc} / {maxWords} words</p>
+    </div>
+  );
+};
+
+const Input = ({value,onChange,placeholder,type="text"}) => (
+  <input type={type} value={value} onChange={e=>onChange(e.target.value)} placeholder={placeholder}
+    style={inputBase} onFocus={focusIn} onBlur={focusOut} />
+);
+
+const SectionWrapper = ({title,intro,children}) => (
+  <div style={{display:"flex",flexDirection:"column",gap:24}}>
+    <div>
+      <h3 style={{fontSize:20,fontWeight:700,marginBottom:12,color:DEEP}}>{title}</h3>
+      <p style={{fontSize:14,lineHeight:1.6,fontStyle:"italic",color:"#6b7280"}}>{intro}</p>
+    </div>
+    {children}
+  </div>
+);
+
+const FieldGroup = ({label,children}) => (
+  <div style={{display:"flex",flexDirection:"column",gap:8}}>
+    <label style={{fontSize:14,fontWeight:600,color:"#1f2937"}}>{label}</label>
+    {children}
+  </div>
+);
+
+const Grid2 = ({children}) => (
+  <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit, minmax(260px, 1fr))",gap:16}}>{children}</div>
+);
+
+function App() {
+  const [step,setStep] = useState(0);
+  const [submitted,setSubmitted] = useState(false);
+  const formRef = useRef(null);
+
+  const [f,setF] = useState({
+    name:"",email:"",company:"",website:"",yearFounded:"",industry:"",locationArmenia:"",locationOther:"",
+    role:"",teamSize:"",stage:"",story:"",
+    focusAreas:[],overIndexed:[],challenge:"",
+    growthGoals:[],leadershipShifts:[],growthNarrative:"",
+    attendFull:"",travelOk:"",bringColleagues:"",colleagueDetails:"",heardAbout:"",referralName:"",anythingElse:""
+  });
+  const u=k=>v=>setF(p=>({...p,[k]:v}));
+  const scrollTop=()=>{if(formRef.current)formRef.current.scrollIntoView({behavior:"smooth",block:"start"});};
+  const next=()=>{setStep(s=>Math.min(s+1,3));scrollTop();};
+  const prev=()=>{setStep(s=>Math.max(s-1,0));scrollTop();};
+
+  if(submitted) return (
+    <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",padding:24,background:"#fafbfc"}}>
+      <div style={{maxWidth:480,textAlign:"center"}}>
+        <PeaksMark size={80} />
+        <h2 style={{fontSize:28,fontWeight:700,margin:"24px 0 16px",color:DEEP}}>Thank You for Applying</h2>
+        <p style={{color:"#6b7280",lineHeight:1.6,marginBottom:12}}>We hope you found this reflection useful.</p>
+        <p style={{fontSize:14,color:"#9ca3af"}}>We'll be in touch after careful review. Selected candidates will be invited to a brief conversation with one of our coaches — a chance for us to understand your goals and for you to assess whether this is the right experience at the right moment.</p>
+      </div>
+    </div>
+  );
+
+  const sections = [
+    <SectionWrapper key={0} title="Section 1: Who You Are and What You've Built" intro="We want to meet the founder behind the business. Share the facts of your company and where you are today — but also tell us something about how you got here. We're interested in what you've built and the person who built it.">
+      <Grid2>
+        <FieldGroup label="Your name"><Input value={f.name} onChange={u("name")} placeholder="Full name" /></FieldGroup>
+        <FieldGroup label="Email"><Input value={f.email} onChange={u("email")} placeholder="you@company.com" type="email" /></FieldGroup>
+        <FieldGroup label="Company name"><Input value={f.company} onChange={u("company")} placeholder="Company name" /></FieldGroup>
+        <FieldGroup label="Website"><Input value={f.website} onChange={u("website")} placeholder="https://" /></FieldGroup>
+        <FieldGroup label="Year founded"><Input value={f.yearFounded} onChange={u("yearFounded")} placeholder="e.g. 2019" /></FieldGroup>
+        <FieldGroup label="Industry / sector"><Input value={f.industry} onChange={u("industry")} placeholder="e.g. FinTech, AgriTech" /></FieldGroup>
+        <FieldGroup label="Location (Armenia)"><Input value={f.locationArmenia} onChange={u("locationArmenia")} placeholder="City" /></FieldGroup>
+        <FieldGroup label="Other locations"><Input value={f.locationOther} onChange={u("locationOther")} placeholder="City, country (if any)" /></FieldGroup>
+      </Grid2>
+      <FieldGroup label="Your role"><RadioGroup options={["Founder / CEO","Co-founder","Other leader"]} value={f.role} onChange={u("role")} /></FieldGroup>
+      <FieldGroup label="Team size"><RadioGroup options={["1–5","6–15","16–30","31–75","76–250","250+"]} value={f.teamSize} onChange={u("teamSize")} /></FieldGroup>
+      <FieldGroup label="Current stage"><RadioGroup options={["Product/market fit: pre-revenue","Early revenue; proving repeatability","Strengthening client relationships and pursuit of sustainable revenue","Scaling revenue; expanding team and systems","Expanding markets or products; managing increasing complexity"]} value={f.stage} onChange={u("stage")} /></FieldGroup>
+      <FieldGroup label="Tell us something about how you got here (200–250 words)">
+        <p style={{fontSize:12,marginBottom:8,fontStyle:"italic",color:ACCENT}}>Look at what you've built. What are you most proud of — and why? What have you learned about how you lead, how you make decisions, and who you need around you?</p>
+        <Textarea value={f.story} onChange={u("story")} placeholder="Share your story…" />
+      </FieldGroup>
+    </SectionWrapper>,
+
+    <SectionWrapper key={1} title="Section 2: Where You're Stuck and What's at Stake" intro="Every founder we've spoken with has a version of the same tension: the business has grown, but something in how you're leading hasn't caught up to your success. You're carrying more than you should. Decisions that shouldn't require you still do. The team is good — but not yet running without you.">
+      <FieldGroup label="Where are you focused right now?"><CheckboxGroup max={2} value={f.focusAreas} onChange={u("focusAreas")} options={["Securing the next level of funding","Building leaders / hiring key roles","Execution and accountability — delivery, systems, operations","Growing key customers / revenue","Expanding beyond your current market","Building culture and talent retention","Other"]} /></FieldGroup>
+      <FieldGroup label="Where does your company's progress depend too heavily on you today?"><CheckboxGroup max={2} value={f.overIndexed} onChange={u("overIndexed")} options={["Investor relations","Sales or business development","Product direction or Product Development","Execution and operations","Customer and partner relationships","Talent hiring, coaching, and retention","Culture and standards","Other"]} /></FieldGroup>
+      <FieldGroup label="Now reflect on what's most challenging right now (200–250 words)">
+        <p style={{fontSize:12,marginBottom:8,fontStyle:"italic",color:ACCENT}}>What is the business challenge you've been carrying — the one you haven't fully named out loud yet? What's at stake if it doesn't change? How do you see your role in this challenge?</p>
+        <Textarea value={f.challenge} onChange={u("challenge")} placeholder="Be honest with yourself…" />
+      </FieldGroup>
+    </SectionWrapper>,
+
+    <SectionWrapper key={2} title="Section 3: Your Growth Ambitions" intro="This section is about where you're going — and who you need to become to get there. We invite you to define your growth goals and consider what it will require of you, as a leader, now to achieve them.">
+      <FieldGroup label="What growth do you want to see in the next 12–18 months?"><CheckboxGroup max={2} value={f.growthGoals} onChange={u("growthGoals")} options={["New investors or significant funding","Leadership depth and a culture of ownership for outcomes","Expanding or evolving the product","Go to market / customer engagement","Scaling sustainable revenue","Expanding the team and operations","Operational efficiency / Manage a turnaround","Entering new markets or geographies","Other"]} /></FieldGroup>
+      <FieldGroup label="What will your business need differently from you now?"><CheckboxGroup max={2} value={f.leadershipShifts} onChange={u("leadershipShifts")} options={["Developing leaders who can run things without me","Letting go of decisions I currently own","Building trust with investors and key partners","Communicating a bigger, bolder vision","Learning faster from what's working and what isn't","Other"]} /></FieldGroup>
+      <FieldGroup label="Now look at both (200–250 words)">
+        <p style={{fontSize:12,marginBottom:8,fontStyle:"italic",color:ACCENT}}>Imagine the version of your business you most want to build — higher market impact, bigger reach, stronger team, sustainable revenue. Who do you need to become as a leader to get there?</p>
+        <Textarea value={f.growthNarrative} onChange={u("growthNarrative")} placeholder="Look ahead…" />
+      </FieldGroup>
+    </SectionWrapper>,
+
+    <SectionWrapper key={3} title="Section 4: Commitment and Fit" intro="The Summit is deeply participatory — every person in the room is a resource for everyone else. We expect full confidentiality. In this section, we ask you to confirm your readiness, logistically and personally.">
+      <FieldGroup label="Can you commit to attending in full? (Thursday June 4, 5 pm – Saturday June 6, 5 pm)"><RadioGroup options={["Yes","No","Not yet sure"]} value={f.attendFull} onChange={u("attendFull")} /></FieldGroup>
+      <FieldGroup label="Travel and lodging are participant-paid; Summit fees and meals are covered. Is that workable?"><RadioGroup options={["Yes","No","I need more information"]} value={f.travelOk} onChange={u("travelOk")} /></FieldGroup>
+      <FieldGroup label="Would you like to attend with others from your company?"><RadioGroup options={["No","Yes — co-founder, C-suite, or key leaders (max two additional)"]} value={f.bringColleagues} onChange={u("bringColleagues")} /></FieldGroup>
+      {f.bringColleagues.startsWith("Yes") && <FieldGroup label="Colleague details"><Textarea value={f.colleagueDetails} onChange={u("colleagueDetails")} placeholder="Name, role, email for each…" maxWords={150} /></FieldGroup>}
+      <FieldGroup label="How did you hear about the Summit?"><RadioGroup options={["Personal invitation","VC nomination","Referred by a friend / other invitee","Direct invitation from JBM Kassarjian Trust","Other"]} value={f.heardAbout} onChange={u("heardAbout")} /></FieldGroup>
+      {f.heardAbout.includes("Referred") && <FieldGroup label="Who referred you?"><Input value={f.referralName} onChange={u("referralName")} placeholder="Name" /></FieldGroup>}
+      <FieldGroup label="Anything else you want us to know? (optional)"><Textarea value={f.anythingElse} onChange={u("anythingElse")} placeholder="About your business, your situation, or what's bringing you here…" maxWords={200} /></FieldGroup>
+    </SectionWrapper>
+  ];
+
+  const btnStyle = {padding:"12px 32px",borderRadius:24,fontSize:14,fontWeight:700,color:"#fff",border:"none",cursor:"pointer",transition:"opacity 0.2s",background:`linear-gradient(135deg, ${MID}, ${DEEP})`,boxShadow:`0 4px 14px rgba(46,16,101,0.3)`};
+
+  return (
+    <div style={{minHeight:"100vh",background:"#fafbfc"}}>
+      <header style={{background:`linear-gradient(135deg, ${DEEP} 0%, ${ACCENT} 50%, ${MID} 100%)`}}>
+        <div style={{maxWidth:720,margin:"0 auto",padding:"20px 24px",display:"flex",alignItems:"center",gap:12}}>
+          <PeaksMark size={32} />
+          <div>
+            <p style={{fontWeight:700,fontSize:14,color:"#fff",letterSpacing:"0.02em"}}>Elevate Growth & Impact</p>
+            <p style={{fontSize:12,color:"rgba(255,255,255,0.55)"}}>Armenian Entrepreneurial Leadership Summit</p>
+          </div>
+        </div>
+      </header>
+
+      <div ref={formRef} style={{maxWidth:720,margin:"0 auto",padding:"40px 24px 8px"}}>
+        <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:12}}>
+          <div style={{height:4,width:32,borderRadius:2,background:ACCENT}} />
+          <p style={{fontSize:12,textTransform:"uppercase",letterSpacing:"0.1em",fontWeight:600,color:ACCENT}}>Invitation to Apply</p>
+        </div>
+        <h2 style={{fontSize:28,fontWeight:700,color:"#1f2937",marginBottom:12}}>Application</h2>
+        <p style={{fontSize:14,lineHeight:1.6,fontStyle:"italic",color:"#6b7280",marginBottom:8}}>We want this application to feel like the beginning of the journey. It should invite and guide honest reflection and signal: this is different from any program you've been invited to join.</p>
+        <p style={{fontSize:14,color:"#9ca3af",marginBottom:32}}>Applying signals readiness to invest in the next phase of growth. You are welcome to complete this in English or Armenian. The Summit will be conducted in English.</p>
+      </div>
+
+      <div style={{maxWidth:720,margin:"0 auto",padding:"0 24px",marginBottom:32}}>
+        <div style={{display:"flex",gap:8}}>
+          {SECTIONS.map((sc,i)=>{
+            const active=i===step,done=i<step;
+            return (
+              <div key={sc} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center"}}>
+                <div style={{height:6,width:"100%",borderRadius:3,transition:"background 0.3s",background:done?DEEP:active?`linear-gradient(90deg,${DEEP},${ACCENT})`:"#e5e7eb"}} />
+                <p style={{fontSize:12,marginTop:8,color:active?DEEP:done?MID:"#9ca3af",fontWeight:active?600:400}}>{sc}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <div style={{maxWidth:720,margin:"0 auto",padding:"0 24px 80px"}}>
+        <div style={{background:"#fff",borderRadius:16,padding:24,border:"1px solid #e5e7eb",boxShadow:`0 1px 3px rgba(0,0,0,0.04), 0 8px 30px rgba(46,16,101,0.05)`,display:"flex",flexDirection:"column",gap:32}}>
+          {sections[step]}
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",paddingTop:24,borderTop:"1px solid #f3f4f6"}}>
+            {step>0 ? <button onClick={prev} style={{fontSize:14,fontWeight:500,color:MID,background:"none",border:"none",cursor:"pointer",padding:0}}>← Previous</button> : <span />}
+            <button onClick={step<3?next:()=>setSubmitted(true)} style={btnStyle}
+              onMouseEnter={e=>e.target.style.opacity="0.9"} onMouseLeave={e=>e.target.style.opacity="1"}>
+              {step<3?"Continue →":"Submit Application"}
+            </button>
+          </div>
+        </div>
+        <div style={{display:"flex",alignItems:"center",justifyContent:"center",gap:8,marginTop:24}}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          <p style={{fontSize:12,color:"#9ca3af"}}>Everything shared in this application is kept confidential by hosts, coaches, and fellow participants.</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.render(React.createElement(App), document.getElementById("root"));
+</script>
+</body>
+</html>
